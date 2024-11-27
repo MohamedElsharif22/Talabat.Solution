@@ -1,33 +1,40 @@
 ﻿using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Talabat.APIs.DTOs;
+using Talabat.APIs.DTOs.ProductDTOs;
 using Talabat.APIs.Errors;
+using Talabat.APIs.Helpers;
 using Talabat.Core.Entities;
 using Talabat.Core.Repository.Contracts;
-using Talabat.Repository.Specifications.Product_Specs;
+using Talabat.Repositories.Specifications.Product_Specs;
 
 namespace Talabat.APIs.Controllers
 {
-    public class ProductsController(IGenericRepository<Product> productRepository,
-                                    IGenericRepository<Brand> brandRepo,
-                                    IGenericRepository<Category> categoryRepo
+    public class ProductsController(IGenericRepository<Product> productRepository
                                     , IMapper mapper) : BaseApiController
     {
         private readonly IGenericRepository<Product> _productRepository = productRepository;
-        private readonly IGenericRepository<Brand> _brandRepo = brandRepo;
-        private readonly IGenericRepository<Category> _categoryRepo = categoryRepo;
         private readonly IMapper _mapper = mapper;
 
+        [Authorize]
         [ProducesResponseType(typeof(ProductToGetDto), StatusCodes.Status200OK)]
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<ProductToGetDto>>> GetAllProducts()
+        public async Task<ActionResult<Pagination<ProductToGetDto>>> GetAllProducts([FromQuery] ProductSpecParams specParams)
         {
-            var specs = new ProductWithBrandAndCategorySpecification();
+            var specs = new ProductWithBrandAndCategorySpecification(specParams);
             var products = await _productRepository.GetAllWithSpecsAsync(specs);
 
             var productsDto = products.Select(P => _mapper.Map<ProductToGetDto>(P));
 
-            return Ok(productsDto);
+            // applying specs to get the count After filteration
+            specParams.GetCountOnly = true;
+            var countSpec = new ProductWithBrandAndCategorySpecification(specParams);
+
+            int count = await _productRepository.GetCountWithspecsAsync(countSpec);
+
+            var page = new Pagination<ProductToGetDto>(specParams.PageIndex, specParams.PageSize, count, productsDto);
+
+            return Ok(page);
         }
 
 

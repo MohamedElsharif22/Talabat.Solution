@@ -1,8 +1,6 @@
-using Microsoft.EntityFrameworkCore;
 using System.Text.Json.Serialization;
 using Talabat.APIs.Extentions;
 using Talabat.APIs.Middlewares;
-using Talabat.Repository.Data;
 
 namespace Talabat.APIs
 {
@@ -16,22 +14,22 @@ namespace Talabat.APIs
             #region Services Configurations
 
             builder.Services.AddControllers()
-                             .AddJsonOptions(config =>
-                             {
-                                 config.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles;
-                             });
+                .AddJsonOptions(configure =>
+                {
+                    configure.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles;
+                });
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddSwaggerServices();
 
-            // Configure store DbContexts with DI
-            builder.Services.AddDbContext<StoreContext>(options =>
-            {
-                options.UseSqlServer(builder.Configuration.GetConnectionString("MainConnectionString"));
-            });
 
+            // Add DBs Services
+            builder.Services.AddDatabasesServices(builder.Configuration);
 
             // Adding Application Required services with Extention method
             builder.Services.AddApplicationServices();
+
+            // Authentication Services
+            builder.Services.AddAuthenticationServices(builder.Configuration);
 
             #endregion
 
@@ -54,6 +52,8 @@ namespace Talabat.APIs
             app.UseHttpsRedirection();
 
             app.UseStaticFiles();
+
+            app.UseAuthentication();
 
             app.UseAuthorization();
 

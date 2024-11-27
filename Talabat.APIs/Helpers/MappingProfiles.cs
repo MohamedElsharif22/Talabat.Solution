@@ -1,6 +1,11 @@
 ﻿using AutoMapper;
-using Talabat.APIs.DTOs;
+using Talabat.APIs.DTOs.AccountDTOs;
+using Talabat.APIs.DTOs.BasketDTOs;
+using Talabat.APIs.DTOs.ProductDTOs;
+using Talabat.APIs.Helpers.MappingResolvers;
 using Talabat.Core.Entities;
+using Talabat.Core.Entities.Basket;
+using Talabat.Core.Entities.Identity;
 
 namespace Talabat.APIs.Helpers
 {
@@ -13,12 +18,16 @@ namespace Talabat.APIs.Helpers
                 .ForMember(dest => dest.Category, O => O.MapFrom(source => source.Category.Name))
                 .ForMember(dest => dest.PictureUrl, O => O.MapFrom<ProductPictureUrlResolver>());
 
-            CreateMap<Brand, BrandToReturnDto>()
-                .ForMember(D => D.Products, O => O.MapFrom<BrandProductsResolver>());
+            CreateMap<Brand, BrandToReturnDto>();
 
-            CreateMap<Category, CategoryToReturnDTO>()
-                .ForMember(D => D.Products, O => O.MapFrom<CategoryProductsResolver>());
+            CreateMap<Category, CategoryToReturnDTO>();
+
+            CreateMap<BasketItem, BasketItemDTO>().ReverseMap();
+            CreateMap<CustomerBasket, CustomerBasketDTO>().ReverseMap();
+            CreateMap<Address, AddressDTO>().ReverseMap();
         }
+
+
 
     }
 }

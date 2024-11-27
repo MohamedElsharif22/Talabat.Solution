@@ -1,9 +1,8 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
-using Talabat.APIs.DTOs;
+using Talabat.APIs.DTOs.ProductDTOs;
 using Talabat.Core.Entities;
 using Talabat.Core.Repository.Contracts;
-using Talabat.Repository.Specifications.Brand_Specs;
 
 namespace Talabat.APIs.Controllers
 {
@@ -15,8 +14,9 @@ namespace Talabat.APIs.Controllers
         [HttpGet]
         public async Task<ActionResult<IReadOnlyList<BrandToReturnDto>>> GetAllBrands()
         {
-            var specs = new BrandWithRelatedProductsSpecs();
-            var brands = await _brandRepo.GetAllWithSpecsAsync(specs);
+
+            var brands = await _brandRepo.GetAllAsync();
+
             var brandsDto = brands.Select(b => _mapper.Map<BrandToReturnDto>(b));
             return Ok(brandsDto);
         }
