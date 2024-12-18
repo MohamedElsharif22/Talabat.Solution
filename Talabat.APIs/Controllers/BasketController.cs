@@ -13,7 +13,7 @@ namespace Talabat.APIs.Controllers
         private readonly IMapper _mapper = mapper;
 
         [HttpGet]
-        public async Task<ActionResult<CustomerBasketDTO>> GetCustomerBasket(string id = "")
+        public async Task<ActionResult<CustomerBasket>> GetCustomerBasket(string id = "")
         {
 
             var basket = await _basketRepository.GetBasketAsync(id);
@@ -23,7 +23,7 @@ namespace Talabat.APIs.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult<CustomerBasket>> UpdateBasket(CustomerBasketDTO basketDTO)
+        public async Task<ActionResult<CustomerBasket>> UpdateBasket(CustomerBasketRequest basketDTO)
         {
             var basket = _mapper.Map<CustomerBasket>(basketDTO);
 

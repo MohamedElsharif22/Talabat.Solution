@@ -24,7 +24,7 @@ namespace Talabat.APIs.Controllers
         private readonly IMapper _mapper = mapper;
 
         [HttpPost("login")]
-        public async Task<ActionResult<UserDTO>> Login(LoginDTO model)
+        public async Task<ActionResult<UserResponse>> Login(LoginRequest model)
         {
             var user = await _userManager.FindByEmailAsync(model.Email);
 
@@ -36,12 +36,12 @@ namespace Talabat.APIs.Controllers
             if (!result.Succeeded)
                 return Unauthorized(new ApiResponse(StatusCodes.Status401Unauthorized, "Invalid Password!"));
 
-            return Ok(await user.ToUserDTOAsync(_authService, _userManager));
+            return Ok(await user.ToUserResponseAsync(_authService, _userManager));
 
         }
 
         [HttpPost("Register")]
-        public async Task<ActionResult<UserDTO>> Register(RegisterDTO model)
+        public async Task<ActionResult<UserResponse>> Register(RegisterRequest model)
         {
 
             var user = new ApplicationUser()
@@ -56,18 +56,18 @@ namespace Talabat.APIs.Controllers
             if (!result.Succeeded)
                 return BadRequest(new ApiValidationErrorResponse() { Errors = result.Errors.Select(E => E.Description) });
 
-            return Ok(await user.ToUserDTOAsync(_authService, _userManager));
+            return Ok(await user.ToUserResponseAsync(_authService, _userManager));
         }
 
         [Authorize]
         [HttpGet]
-        public async Task<ActionResult<UserDTO>> GetCurrentUser()
+        public async Task<ActionResult<UserResponse>> GetCurrentUser()
         {
             var email = User.FindFirstValue(ClaimTypes.Email);
 
             var user = await _userManager.FindByEmailAsync(email!);
 
-            return Ok(await user!.ToUserDTOAsync(_authService, _userManager));
+            return Ok(await user!.ToUserResponseAsync(_authService, _userManager));
 
         }
 
@@ -89,9 +89,6 @@ namespace Talabat.APIs.Controllers
             address.Id = user.Address.Id;
 
             user.Address = _mapper.Map<Address>(address);
-
-
-
 
             var result = await _userManager.UpdateAsync(user);
 

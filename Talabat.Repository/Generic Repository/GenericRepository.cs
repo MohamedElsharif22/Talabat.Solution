@@ -2,7 +2,7 @@
 using Talabat.Core.Entities;
 using Talabat.Core.Repository.Contracts;
 using Talabat.Core.Specifications;
-using Talabat.Repositories.Generic_Repository.Data;
+using Talabat.Repositories._Data;
 using Talabat.Repositories.Generic_Repository.Specifications;
 
 namespace Talabat.Repositories.Generic_Repository
@@ -15,7 +15,7 @@ namespace Talabat.Repositories.Generic_Repository
         {
             _dbContext = dbContext;
         }
-        public async Task<IEnumerable<T>> GetAllAsync()
+        public async Task<IReadOnlyList<T>> GetAllAsync()
         {
 
             return await _dbContext.Set<T>().ToListAsync();
@@ -28,7 +28,7 @@ namespace Talabat.Repositories.Generic_Repository
             return await _dbContext.Set<T>().FindAsync(id);
         }
 
-        public async Task<IEnumerable<T>> GetAllWithSpecsAsync(ISpecification<T> specs)
+        public async Task<IReadOnlyList<T>> GetAllWithSpecsAsync(ISpecification<T> specs)
         {
 
             return await ApplySpecifications(specs).ToListAsync();
@@ -50,5 +50,10 @@ namespace Talabat.Repositories.Generic_Repository
             return SpecificationsEvaluator<T>.BuildQuery(_dbContext.Set<T>(), specs);
         }
 
+        public void Add(T entity) => _dbContext.Add(entity);
+
+        public void Update(T entity) => _dbContext.Update(entity);
+
+        public void Delete(T entity) => _dbContext.Remove(entity);
     }
 }

@@ -1,11 +1,14 @@
 ﻿using AutoMapper;
 using Talabat.APIs.DTOs.AccountDTOs;
 using Talabat.APIs.DTOs.BasketDTOs;
+using Talabat.APIs.DTOs.OrderDTOs;
 using Talabat.APIs.DTOs.ProductDTOs;
 using Talabat.APIs.Helpers.MappingResolvers;
 using Talabat.Core.Entities;
 using Talabat.Core.Entities.Basket;
-using Talabat.Core.Entities.Identity;
+using Talabat.Core.Entities.Order_Aggregate;
+using IdentityAddress = Talabat.Core.Entities.Identity.Address;
+using OrderAddress = Talabat.Core.Entities.Order_Aggregate.Address;
 
 namespace Talabat.APIs.Helpers
 {
@@ -13,18 +16,23 @@ namespace Talabat.APIs.Helpers
     {
         public MappingProfiles()
         {
-            CreateMap<Product, ProductToGetDto>()
+            CreateMap<Product, ProductResponse>()
                 .ForMember(dest => dest.Brand, O => O.MapFrom(source => source.Brand.Name))
                 .ForMember(dest => dest.Category, O => O.MapFrom(source => source.Category.Name))
                 .ForMember(dest => dest.PictureUrl, O => O.MapFrom<ProductPictureUrlResolver>());
 
-            CreateMap<Brand, BrandToReturnDto>();
+            CreateMap<Brand, BrandResponse>();
 
-            CreateMap<Category, CategoryToReturnDTO>();
+            CreateMap<Category, CategoryResponse>();
 
-            CreateMap<BasketItem, BasketItemDTO>().ReverseMap();
-            CreateMap<CustomerBasket, CustomerBasketDTO>().ReverseMap();
-            CreateMap<Address, AddressDTO>().ReverseMap();
+            CreateMap<BasketItem, BasketItemRequest>().ReverseMap();
+            CreateMap<CustomerBasket, CustomerBasketRequest>().ReverseMap();
+            CreateMap<IdentityAddress, AddressDTO>().ReverseMap();
+
+            CreateMap<AddressRequest, OrderAddress>();
+
+            CreateMap<Order, OrderResponse>();
+            CreateMap<DeliveryMethod, DeliveryMethodResponse>();
         }
 
 

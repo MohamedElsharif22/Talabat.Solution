@@ -57,8 +57,8 @@ namespace Talabat.APIs
 
             app.UseAuthorization();
 
-
             app.MapControllers();
+
             #endregion
 
             app.Run();

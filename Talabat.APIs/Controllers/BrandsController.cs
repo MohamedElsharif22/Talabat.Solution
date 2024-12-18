@@ -1,23 +1,23 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using Talabat.APIs.DTOs.ProductDTOs;
+using Talabat.Core;
 using Talabat.Core.Entities;
-using Talabat.Core.Repository.Contracts;
 
 namespace Talabat.APIs.Controllers
 {
-    public class BrandsController(IGenericRepository<Brand> brandRepo, IMapper mapper) : BaseApiController
+    public class BrandsController(IUnitOfWork unitOfWork, IMapper mapper) : BaseApiController
     {
-        private readonly IGenericRepository<Brand> _brandRepo = brandRepo;
+        private readonly IUnitOfWork _unitOfWork = unitOfWork;
         private readonly IMapper _mapper = mapper;
 
         [HttpGet]
-        public async Task<ActionResult<IReadOnlyList<BrandToReturnDto>>> GetAllBrands()
+        public async Task<ActionResult<IReadOnlyList<BrandResponse>>> GetAllBrands()
         {
 
-            var brands = await _brandRepo.GetAllAsync();
+            var brands = await _unitOfWork.Repository<Brand>().GetAllAsync();
 
-            var brandsDto = brands.Select(b => _mapper.Map<BrandToReturnDto>(b));
+            var brandsDto = brands.Select(b => _mapper.Map<BrandResponse>(b));
             return Ok(brandsDto);
         }
     }

@@ -2,12 +2,13 @@
 using System.Linq.Expressions;
 using Talabat.Core.Entities;
 using Talabat.Core.Specifications;
+using Talabat.Core.Specifications.Product_Specification_Params;
 
 namespace Talabat.Repositories.Specifications.Product_Specs
 {
     public class ProductWithBrandAndCategorySpecification : BaseSpecifications<Product>
     {
-        public ProductWithBrandAndCategorySpecification(ProductSpecParams specParams)
+        public ProductWithBrandAndCategorySpecification(ProductSpecParams specParams, bool getCountOnly = false)
             : base(P =>
                        (string.IsNullOrWhiteSpace(specParams.Search) || EF.Functions.Like(P.Name, $"%{specParams.Search}%"))
                         &&
@@ -17,7 +18,7 @@ namespace Talabat.Repositories.Specifications.Product_Specs
                   )
         {
 
-            if (!specParams.GetCountOnly)
+            if (!getCountOnly)
             {
                 Includes.Add(P => P.Brand);
                 Includes.Add(P => P.Category);

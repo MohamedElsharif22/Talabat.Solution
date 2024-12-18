@@ -4,7 +4,7 @@ using Talabat.Core.Entities;
 
 namespace Talabat.APIs.Helpers.MappingResolvers
 {
-    public class ProductPictureUrlResolver : IValueResolver<Product, ProductToGetDto, string>
+    public class ProductPictureUrlResolver : IValueResolver<Product, ProductResponse, string>
     {
         private readonly IConfiguration _configuration;
 
@@ -12,7 +12,7 @@ namespace Talabat.APIs.Helpers.MappingResolvers
         {
             _configuration = configuration;
         }
-        public string Resolve(Product source, ProductToGetDto destination, string destMember, ResolutionContext context)
+        public string Resolve(Product source, ProductResponse destination, string destMember, ResolutionContext context)
         {
             if (!string.IsNullOrWhiteSpace(source.PictureUrl))
                 return $"{_configuration["BaseApiUrl"]}/{source.PictureUrl}";

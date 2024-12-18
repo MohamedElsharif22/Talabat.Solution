@@ -7,14 +7,17 @@ using StackExchange.Redis;
 using System.Text;
 using Talabat.APIs.Errors;
 using Talabat.APIs.Helpers;
+using Talabat.Core;
 using Talabat.Core.Entities.Identity;
 using Talabat.Core.Repository.Contracts;
 using Talabat.Core.Services.Contracts;
+using Talabat.Repositories;
+using Talabat.Repositories._Data;
 using Talabat.Repositories._Identity;
 using Talabat.Repositories.Basket_Repository;
-using Talabat.Repositories.Generic_Repository;
-using Talabat.Repositories.Generic_Repository.Data;
 using Talabat.Services.Auth_Service;
+using Talabat.Services.Order_Service;
+using Talabat.Services.Product_Service;
 
 namespace Talabat.APIs.Extentions
 {
@@ -75,13 +78,21 @@ namespace Talabat.APIs.Extentions
         #region Application Configrations
         public static IServiceCollection AddApplicationServices(this IServiceCollection services)
         {
-            services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
+
+            services.AddScoped<IUnitOfWork, UnitOfWork>();
+
+            //Product Service DI
+            services.AddScoped<IProductService, ProductService>();
+
+            //add Order Service To DI Scope
+            services.AddScoped<IOrderService, OrderService>();
+
 
             // add AutoMapper To DI Scope
             services.AddAutoMapper(typeof(MappingProfiles).Assembly);
 
             // Add Basket Service To the Scope
-            services.AddSingleton<IBasketRepository, BasketRepository>();
+            services.AddScoped<IBasketRepository, BasketRepository>();
 
             //Add Identity Services to DI Container
             services.AddIdentity<ApplicationUser, IdentityRole>(options =>

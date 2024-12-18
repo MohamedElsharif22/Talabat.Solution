@@ -1,62 +1,50 @@
 ﻿using AutoMapper;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Talabat.APIs.DTOs.ProductDTOs;
 using Talabat.APIs.Errors;
 using Talabat.APIs.Helpers;
-using Talabat.Core.Entities;
-using Talabat.Core.Repository.Contracts;
-using Talabat.Repositories.Specifications.Product_Specs;
+using Talabat.Core.Services.Contracts;
+using Talabat.Core.Specifications.Product_Specification_Params;
 
 namespace Talabat.APIs.Controllers
 {
-    public class ProductsController(IGenericRepository<Product> productRepository
+    public class ProductsController(IProductService productService
                                     , IMapper mapper) : BaseApiController
     {
-        private readonly IGenericRepository<Product> _productRepository = productRepository;
+        private readonly IProductService _productService = productService;
         private readonly IMapper _mapper = mapper;
 
-        [Authorize]
-        [ProducesResponseType(typeof(ProductToGetDto), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(ProductResponse), StatusCodes.Status200OK)]
         [HttpGet]
-        public async Task<ActionResult<Pagination<ProductToGetDto>>> GetAllProducts([FromQuery] ProductSpecParams specParams)
+        public async Task<ActionResult<Pagination<ProductResponse>>> GetAllProducts([FromQuery] ProductSpecParams specParams)
         {
-            var specs = new ProductWithBrandAndCategorySpecification(specParams);
-            var products = await _productRepository.GetAllWithSpecsAsync(specs);
+            var products = await _productService.GetAllProductsAsync(specParams);
 
-            var productsDto = products.Select(P => _mapper.Map<ProductToGetDto>(P));
+            if (products == null) return NoContent();
 
-            // applying specs to get the count After filteration
-            specParams.GetCountOnly = true;
-            var countSpec = new ProductWithBrandAndCategorySpecification(specParams);
+            var productsResponse = products.Select(P => _mapper.Map<ProductResponse>(P));
 
-            int count = await _productRepository.GetCountWithspecsAsync(countSpec);
+            int count = await _productService.GetProductsCountAsync(specParams);
 
-            var page = new Pagination<ProductToGetDto>(specParams.PageIndex, specParams.PageSize, count, productsDto);
+            var page = new Pagination<ProductResponse>(specParams.PageIndex, specParams.PageSize, count, productsResponse);
 
             return Ok(page);
         }
 
 
-        [ProducesResponseType(typeof(ProductToGetDto), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(ProductResponse), StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(ApiResponse), StatusCodes.Status404NotFound)]
         [HttpGet("{id}")]
-        public async Task<ActionResult<ProductToGetDto>> GetProductById(int id)
+        public async Task<ActionResult<ProductResponse>> GetProductById(int id)
         {
-            var specs = new ProductWithBrandAndCategorySpecification(P => P.Id == id);
+            var product = await _productService.GetProductByIdAsync(id);
 
-            var product = await _productRepository.GetByIdWithSpecsAsync(specs);
             if (product is null)
                 return NotFound(new ApiResponse(StatusCodes.Status404NotFound));
 
-            return Ok(_mapper.Map<ProductToGetDto>(product));
+            return Ok(_mapper.Map<ProductResponse>(product));
 
         }
-
-
-
-
-
 
     }
 }

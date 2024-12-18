@@ -2,7 +2,7 @@
 
 namespace Talabat.APIs.DTOs.AccountDTOs
 {
-    public class AddressDTO
+    public record AddressDTO
     {
         [JsonIgnore]
         public int Id { get; set; }

@@ -1,8 +1,9 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Talabat.Core.Entities.Identity;
+using Talabat.Repositories._Data;
 using Talabat.Repositories._Identity;
-using Talabat.Repositories.Generic_Repository.Data;
+using Talabat.Repositories._Data;
 
 namespace Talabat.APIs.Extentions
 {
