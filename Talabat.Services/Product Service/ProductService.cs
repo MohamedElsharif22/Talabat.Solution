@@ -20,7 +20,7 @@ namespace Talabat.Services.Product_Service
         {
             var specs = new ProductWithBrandAndCategorySpecification(P => P.Id == productId);
 
-            return await _unitOfWork.Repository<Product>().GetByIdWithSpecsAsync(specs);
+            return await _unitOfWork.Repository<Product>().GetWithSpecsAsync(specs);
         }
 
         public async Task<int> GetProductsCountAsync(ProductSpecParams specParams)

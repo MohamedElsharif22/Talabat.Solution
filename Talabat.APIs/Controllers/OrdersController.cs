@@ -18,7 +18,7 @@ namespace Talabat.APIs.Controllers
 
         [ProducesResponseType(typeof(OrderResponse), 200)]
         [ProducesResponseType(typeof(ApiResponse), StatusCodes.Status400BadRequest)]
-        [EndpointDescription("Create New Order")]
+        [EndpointSummary("Create New Order")]
         [HttpPost]
         public async Task<ActionResult<OrderResponse>> CreateOrder(OrderRequest orderRequest)
         {
@@ -31,7 +31,7 @@ namespace Talabat.APIs.Controllers
             return Ok(order.ToOrderResponse(_configuration));
         }
 
-        [EndpointDescription("Get All Orders For Specific user")]
+        [EndpointSummary("Get All Orders For Specific user")]
         [ProducesResponseType(typeof(IReadOnlyList<OrderResponse>), 200)]
         [ProducesResponseType(typeof(ApiResponse), 404)]
         [HttpGet]
@@ -46,6 +46,7 @@ namespace Talabat.APIs.Controllers
 
         [ProducesResponseType(typeof(OrderResponse), StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(ApiResponse), 404)]
+        [EndpointSummary("Get Order by id and email")]
         [HttpGet("{id}")]
         public async Task<ActionResult<OrderResponse>> GetOrderById(int id, string email)
         {
@@ -58,6 +59,7 @@ namespace Talabat.APIs.Controllers
 
         [ProducesResponseType(typeof(IEnumerable<DeliveryMethodResponse>), 200)]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
+        [EndpointSummary("Get All Delivery Methods")]
         [HttpGet("DeliveryMethods")]
         public async Task<ActionResult<IEnumerable<DeliveryMethodResponse>>> GetDeliveryMethods()
         {

@@ -17,15 +17,16 @@ namespace Talabat.APIs.Controllers
         {
 
             var basket = await _basketRepository.GetBasketAsync(id);
-            return basket is null
-                ? Ok(new CustomerBasket() { Id = id })
-                : Ok(basket);
+            basket ??= await _basketRepository.UpdateBasketAsync(new CustomerBasket() { Id = id });
+            return Ok(basket);
         }
 
         [HttpPost]
         public async Task<ActionResult<CustomerBasket>> UpdateBasket(CustomerBasketRequest basketDTO)
         {
             var basket = _mapper.Map<CustomerBasket>(basketDTO);
+            var basketItems = basketDTO.BasketItems.Select(I => _mapper.Map<BasketItem>(I)).ToList();
+            basket.BasketItems = basketItems;
 
             var createdOrUpdated = await _basketRepository.UpdateBasketAsync(basket);
 

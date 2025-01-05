@@ -17,6 +17,7 @@ using Talabat.Repositories._Identity;
 using Talabat.Repositories.Basket_Repository;
 using Talabat.Services.Auth_Service;
 using Talabat.Services.Order_Service;
+using Talabat.Services.Payment_Service;
 using Talabat.Services.Product_Service;
 
 namespace Talabat.APIs.Extentions
@@ -51,6 +52,13 @@ namespace Talabat.APIs.Extentions
         #region Authentication Configrations
         public static IServiceCollection AddAuthenticationServices(this IServiceCollection services, IConfiguration _configuration)
         {
+
+            //Add Identity Services to DI Container
+            services.AddIdentity<ApplicationUser, IdentityRole>(options =>
+            {
+                options.User.RequireUniqueEmail = true;
+            }).AddEntityFrameworkStores<AppIdentityDbContext>();
+
             // Adding Authintication Schema Bearer
             services.AddAuthentication(options =>
             {
@@ -88,20 +96,18 @@ namespace Talabat.APIs.Extentions
             services.AddScoped<IOrderService, OrderService>();
 
 
+
             // add AutoMapper To DI Scope
             services.AddAutoMapper(typeof(MappingProfiles).Assembly);
 
             // Add Basket Service To the Scope
             services.AddScoped<IBasketRepository, BasketRepository>();
 
-            //Add Identity Services to DI Container
-            services.AddIdentity<ApplicationUser, IdentityRole>(options =>
-            {
-                options.User.RequireUniqueEmail = true;
-            }).AddEntityFrameworkStores<AppIdentityDbContext>();
-
             // Apply DI For AuthService
             services.AddScoped<IAuthService, AuthService>();
+
+            // add paymentService
+            services.AddScoped<IPaymentService, PaymentService>();
 
             // Handling validation errors response
             services.Configure<ApiBehaviorOptions>(options =>

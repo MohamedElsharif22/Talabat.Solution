@@ -31,6 +31,16 @@ namespace Talabat.APIs
             // Authentication Services
             builder.Services.AddAuthenticationServices(builder.Configuration);
 
+            // add cors policies
+            builder.Services.AddCors(options =>
+            {
+                options.AddPolicy("wepPolicy", policyConfig =>
+                {
+                    policyConfig.AllowAnyHeader().AllowAnyMethod().WithOrigins(builder.Configuration["FrontBaseUrl"]);
+                });
+
+            });
+
             #endregion
 
             var app = builder.Build();
@@ -53,11 +63,14 @@ namespace Talabat.APIs
 
             app.UseStaticFiles();
 
+            app.UseCors("wepPolicy");
+
+            app.MapControllers();
+
             app.UseAuthentication();
 
             app.UseAuthorization();
 
-            app.MapControllers();
 
             #endregion
 

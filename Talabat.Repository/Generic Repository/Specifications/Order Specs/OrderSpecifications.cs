@@ -1,4 +1,5 @@
-﻿using Talabat.Core.Entities.Order_Aggregate;
+﻿using System.Linq.Expressions;
+using Talabat.Core.Entities.Order_Aggregate;
 using Talabat.Core.Specifications;
 
 namespace Talabat.Repositories.Generic_Repository.Specifications.Order_Specs
@@ -16,6 +17,11 @@ namespace Talabat.Repositories.Generic_Repository.Specifications.Order_Specs
             : base(O => O.BuyerEmail == buyerEmail && O.Id == orderId)
         {
             AddOrderIncludes();
+        }
+        public OrderSpecifications(Expression<Func<Order, bool>> criteriaExpression, bool addIncludes = false)
+            : base(criteriaExpression)
+        {
+            if (addIncludes) AddOrderIncludes();
         }
 
         private void AddOrderIncludes()

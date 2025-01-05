@@ -18,8 +18,13 @@ namespace Talabat.APIs.DTOs.BasketDTOs
                     id = Guid.NewGuid();
             }
         }
+        public string? PaymentIntentId { get; set; }
+        public string? ClientSecret { get; set; }
+        public int? DeliveryMethodId { get; set; }
 
+        public decimal ShippingPrice { get; set; }
         [Required]
-        public List<BasketItemRequest> BasketItems { get; set; } = new List<BasketItemRequest>();
+        [MinLength(1)]
+        public List<BasketItemRequest> BasketItems { get; set; } = [];
     }
 }
