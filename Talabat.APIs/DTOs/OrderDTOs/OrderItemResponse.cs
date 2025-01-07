@@ -1,6 +1,6 @@
 ﻿namespace Talabat.APIs.DTOs.OrderDTOs
 {
-    public class OrderItemResponse
+    public record OrderItemResponse
     {
         public int Id { get; set; }
         public int ProductId { get; set; }

@@ -2,7 +2,7 @@
 
 namespace Talabat.APIs.DTOs.OrderDTOs
 {
-    public class AddressRequest
+    public record AddressRequest
     {
         [Required]
         public required string FirstName { get; set; }

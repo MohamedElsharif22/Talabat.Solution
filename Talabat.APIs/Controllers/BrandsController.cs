@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using Talabat.APIs.DTOs.ProductDTOs;
+using Talabat.APIs.Helpers.Filters;
 using Talabat.Core;
 using Talabat.Core.Entities;
 
@@ -11,6 +12,7 @@ namespace Talabat.APIs.Controllers
         private readonly IUnitOfWork _unitOfWork = unitOfWork;
         private readonly IMapper _mapper = mapper;
 
+        [Cashed(600)]
         [HttpGet]
         public async Task<ActionResult<IReadOnlyList<BrandResponse>>> GetAllBrands()
         {

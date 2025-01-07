@@ -2,7 +2,7 @@
 
 namespace Talabat.APIs.DTOs.OrderDTOs
 {
-    public class OrderRequest
+    public record OrderRequest
     {
         // string buyerEmail, string basketId, int deliveryMethodId, Address shippingAddress
         [Required]

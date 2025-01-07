@@ -16,6 +16,7 @@ using Talabat.Repositories._Data;
 using Talabat.Repositories._Identity;
 using Talabat.Repositories.Basket_Repository;
 using Talabat.Services.Auth_Service;
+using Talabat.Services.Caching_Service;
 using Talabat.Services.Order_Service;
 using Talabat.Services.Payment_Service;
 using Talabat.Services.Product_Service;
@@ -95,7 +96,8 @@ namespace Talabat.APIs.Extentions
             //add Order Service To DI Scope
             services.AddScoped<IOrderService, OrderService>();
 
-
+            // add ResponseCacheService to DI Container
+            services.AddSingleton<IResponseCacheService, ResponseCacheService>();
 
             // add AutoMapper To DI Scope
             services.AddAutoMapper(typeof(MappingProfiles).Assembly);

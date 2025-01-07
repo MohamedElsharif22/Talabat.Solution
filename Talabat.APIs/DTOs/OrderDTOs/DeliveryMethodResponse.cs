@@ -1,6 +1,6 @@
 ﻿namespace Talabat.APIs.DTOs.OrderDTOs
 {
-    public class DeliveryMethodResponse
+    public record DeliveryMethodResponse
     {
         public int Id { get; set; }
         public string ShortName { get; set; } = null!;

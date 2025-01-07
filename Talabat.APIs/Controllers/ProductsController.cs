@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using Talabat.APIs.DTOs.ProductDTOs;
 using Talabat.APIs.Errors;
 using Talabat.APIs.Helpers;
+using Talabat.APIs.Helpers.Filters;
 using Talabat.Core.Services.Contracts;
 using Talabat.Core.Specifications.Product_Specification_Params;
 
@@ -14,6 +15,7 @@ namespace Talabat.APIs.Controllers
         private readonly IProductService _productService = productService;
         private readonly IMapper _mapper = mapper;
 
+        [Cashed(600)]
         [ProducesResponseType(typeof(ProductResponse), StatusCodes.Status200OK)]
         [HttpGet]
         public async Task<ActionResult<Pagination<ProductResponse>>> GetAllProducts([FromQuery] ProductSpecParams specParams)
@@ -31,7 +33,7 @@ namespace Talabat.APIs.Controllers
             return Ok(page);
         }
 
-
+        [Cashed(600)]
         [ProducesResponseType(typeof(ProductResponse), StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(ApiResponse), StatusCodes.Status404NotFound)]
         [HttpGet("{id}")]
