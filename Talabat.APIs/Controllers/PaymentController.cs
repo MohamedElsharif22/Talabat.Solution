@@ -8,11 +8,13 @@ using Talabat.Core.Services.Contracts;
 namespace Talabat.APIs.Controllers
 {
     [Authorize]
-    public class PaymentController(IPaymentService paymentService) : BaseApiController
+    public class PaymentController(IPaymentService paymentService, IConfiguration configuration) : BaseApiController
     {
         private readonly IPaymentService _paymentService = paymentService;
+        private readonly IConfiguration _configuration = configuration;
+
         // This is your Stripe CLI webhook secret for testing your endpoint locally.
-        private const string endpointSecret = "whsec_5e74ccbe521bb8e3c954abc50bffc8cc65b9ef1b3273d9e07d7ce1d3fa4701e5";
+
 
         [ProducesResponseType(typeof(CustomerBasket), StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(ApiResponse), StatusCodes.Status400BadRequest)]
@@ -32,7 +34,7 @@ namespace Talabat.APIs.Controllers
             var json = await new StreamReader(HttpContext.Request.Body).ReadToEndAsync();
 
             var stripeEvent = EventUtility.ConstructEvent(json,
-                Request.Headers["Stripe-Signature"], endpointSecret);
+                Request.Headers["Stripe-Signature"], _configuration["StripeSettings:webhookSecret"]);
 
             var paymentIntent = (PaymentIntent)stripeEvent.Data.Object;
 
