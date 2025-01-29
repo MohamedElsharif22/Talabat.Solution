@@ -1,0 +1,67 @@
+﻿@model UserRequestViewModel
+@{
+    ViewData["Title"] = "Edit";
+    var roles = Model.Roles.ToArray();
+}
+
+<h1>Edit User</h1>
+
+<form asp-action="Edit"  class="row row- gy-2 gx-3 align-items-center">
+    <div asp-validation-summary="All"></div>
+    <div class="col-md-auto">
+        <label class="visually-hidden" asp-for="DisplayName">Name</label>
+        <input asp-for="DisplayName"  class="form-control">
+    </div>
+    <div class="col-md-auto">
+        <label class="visually-hidden" asp-for="UserName">Username</label>
+        <div class="input-group">
+            <div class="input-group-text">@@</div>
+            <input asp-for="UserName"  class="form-control" placeholder="Username">
+        </div>
+    </div>
+    <div class="col-md-12">
+        <label class="visually-hidden" asp-for="Email">Email</label>
+        <input asp-for="Email"  class="form-control w-50" placeholder="Username">
+    </div>
+    <div class="col-md-12">
+        <label class="visually-hidden" asp-for="PhoneNumber">Phone number</label>
+        <input asp-for="PhoneNumber"  class="form-control w-25" placeholder="Phone Number">
+    </div>
+    <div class="col-auto">
+        <label class="visually-hidden" asp-for="Address.Street">Street</label>
+        <input asp-for="Address.Street"  class="form-control" placeholder="Street">
+    </div>
+    <div class="col-auto">
+        <label class="visually-hidden" asp-for="Address.City">City</label>
+        <input asp-for="Address.City"  class="form-control" placeholder="City">
+    </div>
+    <div class="col-auto">
+        <label class="visually-hidden" asp-for="Address.Counrty">Counrty</label>
+        <input asp-for="Address.Counrty"  class="form-control" placeholder="Counrty">
+    </div>
+
+    <h4>Roles</h4>
+    <div class="row-cols-6 gx-2 my-2">
+        <div class="form-group p-3 border rounded my-3">
+            @for(int i = 0, n = roles.Length; i < n; i++)
+            {
+                <input type="hidden" asp-for="@roles[i].Name" />
+                <input type="hidden" asp-for="@Model.Id" />
+                <div class="form-check form-switch mb-2">
+                    <input class="form-check-input" asp-for="@roles[i].IsInRole" type="checkbox" role="switch">
+                    <label class="form-check-label" asp-for="@roles[i].IsInRole">@roles[i].Name</label>
+                </div>
+            }
+        </div>
+    </div>
+
+    <div class="row-cols-auto gx-2 my-2">
+        <input type="submit" value="Save" class="btn btn-warning" />
+        <a asp-action="Index" class="btn btn-primary">Back to list</a>
+    </div>
+</form>
+
+
+@section ValidationSection{
+    <partial name="_ValidationScriptsPartial" />
+}

@@ -1,0 +1,40 @@
+﻿@model List<UserInRoleViewModel>
+@{
+    ViewData["Title"] = "AddOrRemoveUser";
+    var roleId = ViewData["roleId"] as string;
+}
+
+<h1>Add Or Remove User</h1>
+
+
+@if (Model?.Count() > 0)
+{
+    <div class="text-center mb-3">
+        <form asp-action="AddOrRemoveUsers" method="get" class="d-flex align-items-center justify-content-center">
+            <input class="form-control w-75" type="text" name="UserName" placeholder="User Name" />
+            <input type="hidden" asp-for="@roleId" />
+            <input type="submit" class="btn btn-primary ms-2" />
+        </form>
+    </div>
+    <form asp-action="AddOrRemoveUsers" asp-route-roleId="@roleId">
+        <div class="form-group p-3 border rounded my-3">
+            @for (int i = 0, n = Model.Count(); i < n; i++)
+            {
+                <input type="hidden" asp-for="@Model[i].Id" />
+                <div class="form-check form-switch mb-2">
+                    <input class="form-check-input" asp-for="@Model[i].IsInRole" type="checkbox" role="switch">
+                    <label class="form-check-label" asp-for="@Model[i].IsInRole">@Model[i].Name</label>
+                </div>
+            }
+        </div>
+        <input type="submit" value="Update" class="btn btn-primary" />
+        <a asp-action="Edit" asp-route-id="@roleId" class="btn btn-info">Back</a>
+    </form>
+
+}
+else
+{
+    <div class="mt-2 alert alert-warning">
+        <h3>There are Users For this Roles :(</h3>
+    </div>
+}

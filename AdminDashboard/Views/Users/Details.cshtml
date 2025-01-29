@@ -1,0 +1,50 @@
+﻿@model UserResponseViewModel
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1>User Details</h1>
+
+<div class="row row- gy-2 gx-3 align-items-center">
+    <div class="col-md-auto">
+        <label class="visually-hidden" asp-for="DisplayName">Name</label>
+        <input asp-for="DisplayName" readonly class="form-control">
+    </div>
+    <div class="col-md-auto">
+        <label class="visually-hidden" asp-for="UserName">Username</label>
+        <div class="input-group">
+            <div class="input-group-text">@@</div>
+            <input asp-for="UserName" readonly class="form-control" placeholder="Username">
+        </div>
+    </div>
+    <div class="col-md-12">
+        <label class="visually-hidden" asp-for="Email">Email</label>
+        <input asp-for="Email" readonly class="form-control w-50" placeholder="Username">
+    </div>
+    <div class="col-md-12">
+        <label class="visually-hidden" asp-for="PhoneNumber">Phone number</label>
+        <input asp-for="PhoneNumber" readonly class="form-control w-25" placeholder="Phone Number">
+    </div>
+    <div class="col-auto">
+        <label class="visually-hidden" asp-for="Address.Street">Street</label>
+        <input asp-for="Address.Street" readonly class="form-control" placeholder="Street">
+    </div>
+    <div class="col-auto">
+        <label class="visually-hidden" asp-for="Address.City">City</label>
+        <input asp-for="Address.City" readonly class="form-control" placeholder="City">
+    </div>
+    <div class="col-auto">
+        <label class="visually-hidden" asp-for="Address.Counrty">Counrty</label>
+        <input asp-for="Address.Counrty" readonly class="form-control" placeholder="Counrty">
+    </div>
+    <div class="col-md-12">
+        <label class="visually-hidden" asp-for="StringRoles">Roles</label>
+        <input asp-for="StringRoles" readonly class="form-control w-50" placeholder="Roles">
+    </div>
+</div>
+
+
+<div class="col-auto gx-2 my-2">
+    <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-warning">Edit</a>
+    <a asp-action="Index" class="btn btn-primary">Back to list</a>
+  </div>

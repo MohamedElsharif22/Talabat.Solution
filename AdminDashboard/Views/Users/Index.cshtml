@@ -1,0 +1,48 @@
+﻿@model IEnumerable<UserResponseViewModel>
+@{
+    ViewData["Title"] = "Roles";
+}
+
+<h1 class="text-center">Users</h1>
+<br />
+<a class="btn btn-primary" asp-action="Create">Add user</a>
+
+@if (Model.Count() > 0)
+{
+    <div class="text-center mb-3">
+        <form asp-action="Index" class="d-flex align-items-center justify-content-center">
+            <input class="form-control w-75" type="text" name="search" as placeholder="Search" />
+            <input type="submit" class="btn btn-primary ms-2" />
+        </form>
+    </div>
+    <table class="table table-striped rounded-3 overflow-hidden">
+        <thead class="bg-dark text-white">
+            <tr>
+                <th>@Html.DisplayNameFor(U => U.Id) </th>
+                <th>@Html.DisplayNameFor(U => U.DisplayName) </th>
+                <th>@Html.DisplayNameFor(U => U.Email) </th>
+                <th>@Html.DisplayNameFor(U => U.StringRoles) </th>
+                <th>Details</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var user in Model)
+            {
+                <tr>
+                    <td>@user.Id</td>
+                    <td>@user.DisplayName</td>
+                    <td>@user.Email</td>
+                    <td>@user.StringRoles</td>
+                    <td><a class="btn btn-warning" asp-action="Details" asp-route-id="@user.Id">Details</a></td>
+                </tr>
+            }
+        </tbody>
+
+    </table>
+}
+else
+{
+    <h2 class="text-center text-primary">there is no any users exist!</h2>
+}
+
+
