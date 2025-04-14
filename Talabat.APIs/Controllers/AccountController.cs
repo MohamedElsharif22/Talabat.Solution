@@ -23,6 +23,7 @@ namespace Talabat.APIs.Controllers
         private readonly IAuthService _authService = authService;
         private readonly IMapper _mapper = mapper;
 
+        [EndpointSummary("Login as customer")]
         [HttpPost("login")]
         public async Task<ActionResult<UserResponse>> Login(LoginRequest model)
         {
@@ -40,6 +41,7 @@ namespace Talabat.APIs.Controllers
 
         }
 
+        [EndpointSummary("Register as customer")]
         [HttpPost("Register")]
         public async Task<ActionResult<UserResponse>> Register(RegisterRequest model)
         {
@@ -59,6 +61,7 @@ namespace Talabat.APIs.Controllers
             return Ok(await user.ToUserResponseAsync(_authService, _userManager));
         }
 
+        [EndpointSummary("Get Current user")]
         [Authorize]
         [HttpGet]
         public async Task<ActionResult<UserResponse>> GetCurrentUser()
@@ -71,6 +74,7 @@ namespace Talabat.APIs.Controllers
 
         }
 
+        [EndpointSummary("Get Current user's address")]
         [Authorize]
         [HttpGet("address")]
         public async Task<ActionResult<Address>> GetUserAddress()
@@ -80,6 +84,7 @@ namespace Talabat.APIs.Controllers
             return Ok(_mapper.Map<AddressDTO>(user?.Address));
         }
 
+        [EndpointSummary("Update user's address")]
         [Authorize]
         [HttpPut("address")]
         public async Task<ActionResult<Address>> UpdateUserAddress(AddressDTO address)

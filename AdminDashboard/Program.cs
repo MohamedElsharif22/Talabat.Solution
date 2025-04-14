@@ -1,4 +1,6 @@
 using AdminDashboard.Extentions;
+using Talabat.Core.Services.Contracts;
+using Talabat.Services.Product_Service;
 namespace AdminDashboard
 {
     public class Program
@@ -10,9 +12,13 @@ namespace AdminDashboard
             // Add services to the container.
             builder.Services.AddControllersWithViews();
 
+            builder.Services.AddScoped<IProductService, ProductService>();
+
             builder.Services.AddDatabasesServices(builder.Configuration);
 
             builder.Services.AddAuthenticationServices(builder.Configuration);
+
+            builder.Services.AddApplicationServices();
 
 
             var app = builder.Build();

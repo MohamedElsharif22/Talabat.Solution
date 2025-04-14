@@ -12,6 +12,7 @@ namespace Talabat.APIs.Controllers
         private readonly IUnitOfWork _unitOfWork = unitOfWork;
         private readonly IMapper _mapper = mapper;
 
+        [EndpointSummary("Get All brands")]
         [Cashed(600)]
         [HttpGet]
         public async Task<ActionResult<IReadOnlyList<BrandResponse>>> GetAllBrands()

@@ -12,7 +12,7 @@
         <input class="form-control w-75 " type="text" asp-for="Name" placeholder="Role name..." />
         <span asp-validation-for="Name"></span>
     </div>
-    <input type="submit" class="btn btn-warning mt-3" value="Edit" />
+    <input type="submit" class="btn btn-primary mt-3" value="Update" />
 </form>
 <a asp-action="AddOrRemoveUsers" asp-route-roleId="@Model.Id" class="btn btn-success mt-3">Add Or Remove Users</a>
 

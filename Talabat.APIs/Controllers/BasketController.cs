@@ -12,6 +12,7 @@ namespace Talabat.APIs.Controllers
         private readonly IBasketRepository _basketRepository = basketRepository;
         private readonly IMapper _mapper = mapper;
 
+        [EndpointSummary("Get customer basket")]
         [HttpGet]
         public async Task<ActionResult<CustomerBasket>> GetCustomerBasket(string id = "")
         {
@@ -21,6 +22,7 @@ namespace Talabat.APIs.Controllers
             return Ok(basket);
         }
 
+        [EndpointSummary("Update Basket")]
         [HttpPost]
         public async Task<ActionResult<CustomerBasket>> UpdateBasket(CustomerBasketRequest basketDTO)
         {
@@ -35,6 +37,7 @@ namespace Talabat.APIs.Controllers
                 : Ok(createdOrUpdated);
         }
 
+        [EndpointSummary("Delete Basket")]
         [HttpDelete]
         public async Task<ActionResult> DeleteBasket(string id)
         {

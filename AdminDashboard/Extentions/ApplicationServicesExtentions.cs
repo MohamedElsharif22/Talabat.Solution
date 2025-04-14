@@ -1,8 +1,12 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using Talabat.Core;
 using Talabat.Core.Entities.Identity;
+using Talabat.Core.Services.Contracts;
+using Talabat.Repositories;
 using Talabat.Repositories._Data;
 using Talabat.Repositories._Identity;
+using Talabat.Services.Product_Service;
 
 namespace AdminDashboard.Extentions
 {
@@ -34,6 +38,21 @@ namespace AdminDashboard.Extentions
             {
                 options.User.RequireUniqueEmail = true;
             }).AddEntityFrameworkStores<AppIdentityDbContext>();
+
+
+            return services;
+        }
+        #endregion
+
+
+        #region Application Configrations
+        public static IServiceCollection AddApplicationServices(this IServiceCollection services)
+        {
+
+            services.AddScoped<IUnitOfWork, UnitOfWork>();
+
+            //Product Service DI
+            services.AddScoped<IProductService, ProductService>();
 
 
             return services;

@@ -17,10 +17,12 @@
         </form>
     </div>
     <form asp-action="AddOrRemoveUsers" asp-route-roleId="@roleId">
+        <div class="alert alert-danger" asp-validation-summary="All"></div>
         <div class="form-group p-3 border rounded my-3">
             @for (int i = 0, n = Model.Count(); i < n; i++)
             {
-                <input type="hidden" asp-for="@Model[i].Id" />
+                <input type="hidden" class="d-none" asp-for="@Model[i].Id" />
+                <input type="hidden" class="d-none" asp-for="@Model[i].Name" />
                 <div class="form-check form-switch mb-2">
                     <input class="form-check-input" asp-for="@Model[i].IsInRole" type="checkbox" role="switch">
                     <label class="form-check-label" asp-for="@Model[i].IsInRole">@Model[i].Name</label>

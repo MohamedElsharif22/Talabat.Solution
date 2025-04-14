@@ -12,6 +12,7 @@ namespace Talabat.APIs.Controllers
         private readonly IUnitOfWork _unitOfWork = unitOfWork;
         private readonly IMapper _mapper = mapper;
 
+        [EndpointSummary("Get All Categories")]
         [Cashed(600)]
         [HttpGet]
         public async Task<ActionResult<IReadOnlyList<CategoryResponse>>> GetAllCategories()
@@ -23,6 +24,7 @@ namespace Talabat.APIs.Controllers
             return Ok(catsDto);
         }
 
+        [EndpointSummary("Get Categoty by ID")]
         [HttpGet("{id}")]
         public async Task<ActionResult<IReadOnlyList<CategoryResponse>>> GetCategoryById(int id)
         {

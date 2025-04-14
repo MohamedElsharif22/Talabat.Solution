@@ -15,6 +15,7 @@ namespace Talabat.APIs.Controllers
         private readonly IProductService _productService = productService;
         private readonly IMapper _mapper = mapper;
 
+        [EndpointSummary("Get all products")]
         [Cashed(600)]
         [ProducesResponseType(typeof(ProductResponse), StatusCodes.Status200OK)]
         [HttpGet]
@@ -33,7 +34,9 @@ namespace Talabat.APIs.Controllers
             return Ok(page);
         }
 
+
         [Cashed(600)]
+        [EndpointSummary("Get product by id")]
         [ProducesResponseType(typeof(ProductResponse), StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(ApiResponse), StatusCodes.Status404NotFound)]
         [HttpGet("{id}")]

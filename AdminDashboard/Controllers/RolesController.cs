@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using System.Security.Claims;
 using Talabat.Core.Entities.Identity;
 
 namespace AdminDashboard.Controllers
@@ -193,8 +194,15 @@ namespace AdminDashboard.Controllers
                     ModelState.AddModelError($"UserId: {user.Id}", "Error occured while adding user to role!");
                 }
 
+                var currentUserId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+
                 if (inRole && !userInRole.IsInRole)
                 {
+                    if (user.Id == currentUserId && role.Name.Equals("admin", StringComparison.OrdinalIgnoreCase))
+                    {
+                        ModelState.AddModelError($"UserId: {user.Id}", "You can't remove yourself from the admin role!");
+                        return View(usersInRole);
+                    }
                     var result = await _userManager.RemoveFromRoleAsync(user, role.Name);
                     if (result.Succeeded)
                     {
@@ -202,6 +210,7 @@ namespace AdminDashboard.Controllers
                         if (result.Succeeded) continue;
                     }
                     ModelState.AddModelError($"UserId: {user.Id}", "Error occured while removing user From role!");
+                    return View(usersInRole);
                 }
             }
 

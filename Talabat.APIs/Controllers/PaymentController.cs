@@ -28,6 +28,7 @@ namespace Talabat.APIs.Controllers
             return Ok(basket);
         }
 
+        [EndpointSummary("Get payment status")]
         [HttpPost("webhook")]
         public async Task<IActionResult> WebHook()
         {

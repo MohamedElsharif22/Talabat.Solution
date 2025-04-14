@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using System.Security.Claims;
 using Talabat.Core.Entities.Identity;
 
 namespace AdminDashboard.Controllers
@@ -83,16 +84,24 @@ namespace AdminDashboard.Controllers
 
             if (model.Roles.Any())
             {
-                foreach (var userRole in model.Roles)
+                foreach (var userRoleVM in model.Roles)
                 {
-                    userRole.Name ??= "";
+                    userRoleVM.Name ??= "";
 
-                    var result = await _userManager.IsInRoleAsync(user, userRole.Name);
+                    var assignedToRole = await _userManager.IsInRoleAsync(user, userRoleVM.Name);
 
-                    if (userRole.IsInRole && !result)
-                        await _userManager.AddToRoleAsync(user, userRole.Name);
-                    else if (!userRole.IsInRole && result)
-                        await _userManager.RemoveFromRoleAsync(user, userRole.Name);
+                    if (userRoleVM.IsInRole && !assignedToRole)
+                        await _userManager.AddToRoleAsync(user, userRoleVM.Name);
+                    else if (!userRoleVM.IsInRole && assignedToRole)
+                    {
+                        var currentUserId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+                        if (user.Id == currentUserId && userRoleVM.Name.Equals("admin", StringComparison.OrdinalIgnoreCase))
+                        {
+                            ModelState.AddModelError($"UserId {user.Id}", $"You can't Unassign yourself from {userRoleVM.Name} role!");
+                            return View(model);
+                        }
+                        await _userManager.RemoveFromRoleAsync(user, userRoleVM.Name);
+                    }
 
                 }
             }
