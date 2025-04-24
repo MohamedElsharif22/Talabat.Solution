@@ -1,8 +1,8 @@
-using AdminDashboard.Models;
+using AdminDashboard.MVC.Models;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 
-namespace AdminDashboard.Controllers
+namespace AdminDashboard.MVC.Controllers
 {
     public class HomeController : Controller
     {

@@ -3,9 +3,9 @@ using Talabat.Core.Entities;
 using Talabat.Core.Entities.Order_Aggregate;
 using Talabat.Core.Repository.Contracts;
 using Talabat.Core.Services.Contracts;
-using Talabat.Repositories.Generic_Repository.Specifications.Order_Specs;
+using Talabat.Application.Generic_Repository.Specifications.Order_Specs;
 
-namespace Talabat.Services.Order_Service
+namespace Talabat.Infrastructure.Order_Service
 {
     public class OrderService(
         IBasketRepository basketRepo,

@@ -2,7 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using Talabat.Core.Entities.Identity;
 
-namespace Talabat.Repositories._Identity
+namespace Talabat.Application._Identity
 {
     public class AppIdentityDbContext(DbContextOptions<AppIdentityDbContext> options)
         : IdentityDbContext<ApplicationUser>(options)

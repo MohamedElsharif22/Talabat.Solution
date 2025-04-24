@@ -1,7 +1,7 @@
-using AdminDashboard.Extentions;
+using AdminDashboard.MVC.Extentions;
 using Talabat.Core.Services.Contracts;
-using Talabat.Services.Product_Service;
-namespace AdminDashboard
+using Talabat.Infrastructure.Product_Service;
+namespace AdminDashboard.MVC
 {
     public class Program
     {

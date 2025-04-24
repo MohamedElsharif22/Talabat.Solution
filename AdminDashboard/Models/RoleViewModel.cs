@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace AdminDashboard.Models
+namespace AdminDashboard.MVC.Models
 {
     public record RoleViewModel
     {

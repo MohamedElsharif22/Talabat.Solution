@@ -1,7 +1,7 @@
-﻿using AdminDashboard.Models.UserViewModels;
+﻿using AdminDashboard.MVC.Models.UserViewModels;
 using Talabat.Core.Entities.Identity;
 
-namespace AdminDashboard.Helpers.Mapping
+namespace AdminDashboard.MVC.Helpers.Mapping
 {
     public static class UserMapping
     {

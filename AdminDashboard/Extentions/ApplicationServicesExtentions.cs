@@ -3,12 +3,12 @@ using Microsoft.EntityFrameworkCore;
 using Talabat.Core;
 using Talabat.Core.Entities.Identity;
 using Talabat.Core.Services.Contracts;
-using Talabat.Repositories;
-using Talabat.Repositories._Data;
-using Talabat.Repositories._Identity;
-using Talabat.Services.Product_Service;
+using Talabat.Application._Data;
+using Talabat.Application._Identity;
+using Talabat.Infrastructure.Product_Service;
+using Talabat.Application;
 
-namespace AdminDashboard.Extentions
+namespace AdminDashboard.MVC.Extentions
 {
     public static class ApplicationServicesExtentions
     {

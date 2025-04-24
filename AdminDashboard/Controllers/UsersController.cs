@@ -1,5 +1,5 @@
-﻿using AdminDashboard.Helpers.Mapping;
-using AdminDashboard.Models.UserViewModels;
+﻿using AdminDashboard.MVC.Helpers.Mapping;
+using AdminDashboard.MVC.Models.UserViewModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -7,7 +7,7 @@ using Microsoft.EntityFrameworkCore;
 using System.Security.Claims;
 using Talabat.Core.Entities.Identity;
 
-namespace AdminDashboard.Controllers
+namespace AdminDashboard.MVC.Controllers
 {
     [Authorize(Roles = "Admin")]
     public class UsersController(UserManager<ApplicationUser> userManager, RoleManager<IdentityRole> roleManager) : Controller

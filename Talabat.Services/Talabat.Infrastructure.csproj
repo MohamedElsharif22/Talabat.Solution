@@ -12,7 +12,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Talabat.Repository\Talabat.Repositories.csproj" />
+    <ProjectReference Include="..\Talabat.Repository\Talabat.Application.csproj" />
   </ItemGroup>
 
 </Project>

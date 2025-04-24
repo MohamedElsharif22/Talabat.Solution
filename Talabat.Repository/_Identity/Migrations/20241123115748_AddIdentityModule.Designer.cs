@@ -5,11 +5,11 @@ using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using Talabat.Repositories._Identity;
+using Talabat.Application._Identity;
 
 #nullable disable
 
-namespace Talabat.Repositories._Identity.Migrations
+namespace Talabat.Application._Identity.Migrations
 {
     [DbContext(typeof(AppIdentityDbContext))]
     [Migration("20241123115748_AddIdentityModule")]

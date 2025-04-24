@@ -2,7 +2,7 @@
 using Talabat.Core.Entities;
 using Talabat.Core.Entities.Order_Aggregate;
 
-namespace Talabat.Repositories._Data
+namespace Talabat.Application._Data
 {
     public static class StoreDbContextSeed
     {

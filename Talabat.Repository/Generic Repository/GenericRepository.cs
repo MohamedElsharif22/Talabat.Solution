@@ -2,10 +2,10 @@
 using Talabat.Core.Entities;
 using Talabat.Core.Repository.Contracts;
 using Talabat.Core.Specifications;
-using Talabat.Repositories._Data;
-using Talabat.Repositories.Generic_Repository.Specifications;
+using Talabat.Application._Data;
+using Talabat.Application.Generic_Repository.Specifications;
 
-namespace Talabat.Repositories.Generic_Repository
+namespace Talabat.Application.Generic_Repository
 {
     public class GenericRepository<T> : IGenericRepository<T> where T : BaseEntity
     {

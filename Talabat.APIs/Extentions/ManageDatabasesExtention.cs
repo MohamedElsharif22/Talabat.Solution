@@ -1,9 +1,8 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Talabat.Core.Entities.Identity;
-using Talabat.Repositories._Data;
-using Talabat.Repositories._Identity;
-using Talabat.Repositories._Data;
+using Talabat.Application._Data;
+using Talabat.Application._Identity;
 
 namespace Talabat.APIs.Extentions
 {
@@ -27,7 +26,8 @@ namespace Talabat.APIs.Extentions
                 await _storeDbContext.Database.MigrateAsync();
                 await _identityDbContext.Database.MigrateAsync();
                 var _userManeger = services.GetRequiredService<UserManager<ApplicationUser>>();
-                await IdentityDbContextSeed.SeedDataAsync(_userManeger);
+                var _roleManager = services.GetRequiredService<RoleManager<IdentityRole>>();
+                await IdentityDbContextSeed.SeedDataAsync(_userManeger, _roleManager);
                 await StoreDbContextSeed.SeedAsync(_storeDbContext);
             }
             catch (Exception ex)

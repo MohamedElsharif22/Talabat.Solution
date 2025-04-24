@@ -2,7 +2,7 @@
 using Talabat.Core.Entities.Order_Aggregate;
 using Talabat.Core.Specifications;
 
-namespace Talabat.Repositories.Generic_Repository.Specifications.Order_Specs
+namespace Talabat.Application.Generic_Repository.Specifications.Order_Specs
 {
     public class OrderSpecifications : BaseSpecifications<Order>
     {

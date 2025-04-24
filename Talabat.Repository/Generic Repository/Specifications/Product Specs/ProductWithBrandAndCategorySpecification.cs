@@ -4,7 +4,7 @@ using Talabat.Core.Entities;
 using Talabat.Core.Specifications;
 using Talabat.Core.Specifications.Product_Specification_Params;
 
-namespace Talabat.Repositories.Specifications.Product_Specs
+namespace Talabat.Application.Specifications.Product_Specs
 {
     public class ProductWithBrandAndCategorySpecification : BaseSpecifications<Product>
     {

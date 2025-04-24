@@ -7,11 +7,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Talabat.APIs", "Talabat.API
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Talabat.Core", "Talabat.Core\Talabat.Core.csproj", "{08A06D06-A2BF-48C6-ABDE-C9A07C783F63}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Talabat.Repositories", "Talabat.Repository\Talabat.Repositories.csproj", "{66353134-7FC4-43E2-87BE-429401B968FA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Talabat.Application", "Talabat.Repository\Talabat.Application.csproj", "{66353134-7FC4-43E2-87BE-429401B968FA}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Talabat.Services", "Talabat.Services\Talabat.Services.csproj", "{B4B211A8-B529-4877-B743-0EA4E1BEA01A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Talabat.Infrastructure", "Talabat.Services\Talabat.Infrastructure.csproj", "{B4B211A8-B529-4877-B743-0EA4E1BEA01A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AdminDashboard", "AdminDashboard\AdminDashboard.csproj", "{297D3383-D3E9-4CC8-ACB9-44CABE08E338}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AdminDashboard.MVC", "AdminDashboard\AdminDashboard.MVC.csproj", "{297D3383-D3E9-4CC8-ACB9-44CABE08E338}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

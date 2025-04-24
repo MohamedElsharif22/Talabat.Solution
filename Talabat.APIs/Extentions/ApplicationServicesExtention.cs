@@ -11,15 +11,15 @@ using Talabat.Core;
 using Talabat.Core.Entities.Identity;
 using Talabat.Core.Repository.Contracts;
 using Talabat.Core.Services.Contracts;
-using Talabat.Repositories;
-using Talabat.Repositories._Data;
-using Talabat.Repositories._Identity;
-using Talabat.Repositories.Basket_Repository;
-using Talabat.Services.Auth_Service;
-using Talabat.Services.Caching_Service;
-using Talabat.Services.Order_Service;
-using Talabat.Services.Payment_Service;
-using Talabat.Services.Product_Service;
+using Talabat.Application._Data;
+using Talabat.Application._Identity;
+using Talabat.Application.Basket_Repository;
+using Talabat.Infrastructure.Auth_Service;
+using Talabat.Infrastructure.Caching_Service;
+using Talabat.Infrastructure.Order_Service;
+using Talabat.Infrastructure.Payment_Service;
+using Talabat.Infrastructure.Product_Service;
+using Talabat.Application;
 
 namespace Talabat.APIs.Extentions
 {

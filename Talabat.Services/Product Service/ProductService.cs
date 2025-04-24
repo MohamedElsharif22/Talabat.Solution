@@ -2,9 +2,9 @@
 using Talabat.Core.Entities;
 using Talabat.Core.Services.Contracts;
 using Talabat.Core.Specifications.Product_Specification_Params;
-using Talabat.Repositories.Specifications.Product_Specs;
+using Talabat.Application.Specifications.Product_Specs;
 
-namespace Talabat.Services.Product_Service
+namespace Talabat.Infrastructure.Product_Service
 {
     public class ProductService(IUnitOfWork unitOfWork) : IProductService
     {

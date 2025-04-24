@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace AdminDashboard.Models.UserViewModels
+namespace AdminDashboard.MVC.Models.UserViewModels
 {
     public class UserRequestViewModel
     {

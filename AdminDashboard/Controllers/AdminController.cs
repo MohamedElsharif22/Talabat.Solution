@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using Talabat.APIs.DTOs.AccountDTOs;
 using Talabat.Core.Entities.Identity;
 
-namespace AdminDashboard.Controllers
+namespace AdminDashboard.MVC.Controllers
 {
 
     public class AdminController(UserManager<ApplicationUser> userManager, SignInManager<ApplicationUser> signInManager) : Controller

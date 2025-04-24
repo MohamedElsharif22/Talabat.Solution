@@ -2,7 +2,7 @@
 
 #nullable disable
 
-namespace Talabat.Repositories._Identity.Migrations
+namespace Talabat.Application._Identity.Migrations
 {
     /// <inheritdoc />
     public partial class AddIdentityModule : Migration

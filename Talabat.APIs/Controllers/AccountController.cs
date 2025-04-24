@@ -37,7 +37,9 @@ namespace Talabat.APIs.Controllers
             if (!result.Succeeded)
                 return Unauthorized(new ApiResponse(StatusCodes.Status401Unauthorized, "Invalid Password!"));
 
-            return Ok(await user.ToUserResponseAsync(_authService, _userManager));
+            var token = await _authService.CreateTokenAsync(user, _userManager);
+
+            return Ok(user.ToUserResponseAsync(token));
 
         }
 
@@ -58,7 +60,9 @@ namespace Talabat.APIs.Controllers
             if (!result.Succeeded)
                 return BadRequest(new ApiValidationErrorResponse() { Errors = result.Errors.Select(E => E.Description) });
 
-            return Ok(await user.ToUserResponseAsync(_authService, _userManager));
+            var token = await _authService.CreateTokenAsync(user, _userManager);
+
+            return Ok(user.ToUserResponseAsync(token));
         }
 
         [EndpointSummary("Get Current user")]
@@ -68,9 +72,15 @@ namespace Talabat.APIs.Controllers
         {
             var email = User.FindFirstValue(ClaimTypes.Email);
 
-            var user = await _userManager.FindByEmailAsync(email!);
+            if (string.IsNullOrWhiteSpace(email)) return NotFound(new ApiResponse(404));
 
-            return Ok(await user!.ToUserResponseAsync(_authService, _userManager));
+            var user = await _userManager.FindByEmailAsync(email);
+
+            if (user is null) return NotFound(new ApiResponse(404));
+
+            var token = await _authService.CreateTokenAsync(user, _userManager);
+
+            return Ok(user.ToUserResponseAsync(token));
 
         }
 

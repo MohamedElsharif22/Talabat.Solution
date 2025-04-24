@@ -1,7 +1,7 @@
-﻿using AdminDashboard.Models;
+﻿using AdminDashboard.MVC.Models;
 using Microsoft.AspNetCore.Identity;
 
-namespace AdminDashboard.Helpers.Mapping
+namespace AdminDashboard.MVC.Helpers.Mapping
 {
     public static class RoleMapping
     {

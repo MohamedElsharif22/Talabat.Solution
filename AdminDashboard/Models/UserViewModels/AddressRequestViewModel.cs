@@ -1,4 +1,4 @@
-﻿namespace AdminDashboard.Models.UserViewModels
+﻿namespace AdminDashboard.MVC.Models.UserViewModels
 {
     public class AddressRequestViewModel
     {

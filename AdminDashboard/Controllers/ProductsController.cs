@@ -4,7 +4,7 @@ using Talabat.APIs.DTOs.ProductDTOs;
 using Talabat.Core.Services.Contracts;
 using Talabat.Core.Specifications.Product_Specification_Params;
 
-namespace AdminDashboard.Controllers
+namespace AdminDashboard.MVC.Controllers
 {
     public class ProductsController(IProductService productService, IMapper mapper) : Controller
     {

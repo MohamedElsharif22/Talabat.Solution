@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
-namespace Talabat.Repositories._Data.Migrations
+namespace Talabat.Application._Data.Migrations
 {
     /// <inheritdoc />
     public partial class AddOrderModule : Migration

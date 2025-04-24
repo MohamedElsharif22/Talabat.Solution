@@ -1,21 +1,19 @@
-﻿using Microsoft.AspNetCore.Identity;
-using Talabat.APIs.DTOs.AccountDTOs;
+﻿using Talabat.APIs.DTOs.AccountDTOs;
 using Talabat.APIs.DTOs.OrderDTOs;
 using Talabat.Core.Entities.Identity;
 using Talabat.Core.Entities.Order_Aggregate;
-using Talabat.Core.Services.Contracts;
 
 namespace Talabat.APIs.Extentions
 {
     public static class MappingExtentions
     {
-        public static async Task<UserResponse> ToUserResponseAsync(this ApplicationUser user, IAuthService _authService, UserManager<ApplicationUser> _userManager)
+        public static UserResponse ToUserResponseAsync(this ApplicationUser user, string token)
         {
             return new UserResponse
             {
                 Name = user.DisplayName,
                 Email = user.Email!,
-                Token = await _authService.CreateTokenAsync(user, _userManager)
+                Token = token
             };
         }
 

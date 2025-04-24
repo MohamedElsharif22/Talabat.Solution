@@ -3,7 +3,7 @@ using System.Text.Json;
 using Talabat.Core.Entities.Basket;
 using Talabat.Core.Repository.Contracts;
 
-namespace Talabat.Repositories.Basket_Repository
+namespace Talabat.Application.Basket_Repository
 {
     public class BasketRepository(IConnectionMultiplexer redis) : IBasketRepository
     {

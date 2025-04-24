@@ -2,7 +2,7 @@
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using Talabat.Core.Entities.Order_Aggregate;
 
-namespace Talabat.Repositories._Data.Configrations.Order_Configrations
+namespace Talabat.Application._Data.Configrations.Order_Configrations
 {
     internal class DeliveryMethodConfigration : IEntityTypeConfiguration<DeliveryMethod>
     {

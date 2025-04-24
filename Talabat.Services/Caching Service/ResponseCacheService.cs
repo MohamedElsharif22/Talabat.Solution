@@ -2,7 +2,7 @@
 using System.Text.Json;
 using Talabat.Core.Services.Contracts;
 
-namespace Talabat.Services.Caching_Service
+namespace Talabat.Infrastructure.Caching_Service
 {
     public class ResponseCacheService(IConnectionMultiplexer redis) : IResponseCacheService
     {

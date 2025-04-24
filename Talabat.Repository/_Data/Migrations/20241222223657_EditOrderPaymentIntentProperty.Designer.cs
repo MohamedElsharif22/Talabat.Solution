@@ -5,11 +5,11 @@ using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using Talabat.Repositories._Data;
+using Talabat.Application._Data;
 
 #nullable disable
 
-namespace Talabat.Repositories._Data.Migrations
+namespace Talabat.Application._Data.Migrations
 {
     [DbContext(typeof(StoreContext))]
     [Migration("20241222223657_EditOrderPaymentIntentProperty")]

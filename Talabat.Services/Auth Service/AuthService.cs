@@ -7,7 +7,7 @@ using System.Text;
 using Talabat.Core.Entities.Identity;
 using Talabat.Core.Services.Contracts;
 
-namespace Talabat.Services.Auth_Service
+namespace Talabat.Infrastructure.Auth_Service
 {
     public class AuthService(IConfiguration configuration) : IAuthService
     {

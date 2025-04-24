@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel;
 
-namespace AdminDashboard.Models.UserViewModels
+namespace AdminDashboard.MVC.Models.UserViewModels
 {
     public class UserResponseViewModel(IList<string>? roles)
     {

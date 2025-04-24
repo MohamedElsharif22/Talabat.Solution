@@ -5,9 +5,9 @@ using Talabat.Core.Entities.Basket;
 using Talabat.Core.Entities.Order_Aggregate;
 using Talabat.Core.Repository.Contracts;
 using Talabat.Core.Services.Contracts;
-using Talabat.Repositories.Generic_Repository.Specifications.Order_Specs;
+using Talabat.Application.Generic_Repository.Specifications.Order_Specs;
 
-namespace Talabat.Services.Payment_Service
+namespace Talabat.Infrastructure.Payment_Service
 {
     public class PaymentService(
         IConfiguration configuration,

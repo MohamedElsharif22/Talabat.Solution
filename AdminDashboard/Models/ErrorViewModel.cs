@@ -1,4 +1,4 @@
-namespace AdminDashboard.Models
+namespace AdminDashboard.MVC.Models
 {
     public class ErrorViewModel
     {
