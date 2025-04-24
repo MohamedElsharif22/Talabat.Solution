@@ -6,7 +6,7 @@ A full-featured **E-Commerce RESTful API** built with **ASP.NET Core Web API**, 
 
 ## 🔧 Features
 
-- ✅ **Basket Functionality** with caching to prevent unnecessary data from being entered into the database.
+- ✅ **Basket Functionality** with caching to prevent unnecessary data from being entered into the database
 - ✅ **Order Management** module for handling customer orders
 
 - ✅ **Identity Authentication** with JWT
@@ -23,7 +23,7 @@ A full-featured **E-Commerce RESTful API** built with **ASP.NET Core Web API**, 
 - ✅ **Specification Pattern** for dynamic query building
 - ✅ **Generic Repository** & **Unit of Work** design patterns
 - ✅ **Onion Architecture** for modular and clean layering
-- ✅ **AutoMapper** & **Extension Methods** for DTO mapping
+- ✅ **AutoMapper** & Extension Methods for DTO mapping
 - ✅ **Custom Middleware** for global exception handling
 - ✅ **Data Seeding**: Auto-inserts initial data on first run
 - ✅ **Automatic Migrations**: Applies EF Core migrations at startup
@@ -45,6 +45,12 @@ To test the API:
 - Register with any email
 - Use a password in the format: `P@ssw0rd`
 - You may use `P@ssw0rd` directly for testing.
+
+#### 🔐 Admin Access
+
+- You can log in directly as an Admin using:
+  - **Email:** `admin@aspnet.com`
+  - **Password:** `P@ssw0rd`
 
 ---
 
