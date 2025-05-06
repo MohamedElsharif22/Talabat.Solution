@@ -1,12 +1,13 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using Talabat.APIs.Helpers;
+using Talabat.Application;
+using Talabat.Application._Data;
+using Talabat.Application._Identity;
 using Talabat.Core;
 using Talabat.Core.Entities.Identity;
 using Talabat.Core.Services.Contracts;
-using Talabat.Application._Data;
-using Talabat.Application._Identity;
 using Talabat.Infrastructure.Product_Service;
-using Talabat.Application;
 
 namespace AdminDashboard.MVC.Extentions
 {
@@ -53,6 +54,8 @@ namespace AdminDashboard.MVC.Extentions
 
             //Product Service DI
             services.AddScoped<IProductService, ProductService>();
+
+            services.AddAutoMapper(typeof(MappingProfiles));
 
 
             return services;

@@ -21,13 +21,11 @@ namespace Talabat.APIs.Controllers
         [HttpGet]
         public async Task<ActionResult<Pagination<ProductResponse>>> GetAllProducts([FromQuery] ProductSpecParams specParams)
         {
-            var products = await _productService.GetAllProductsAsync(specParams);
+            var (products, count) = await _productService.GetAllProductsWithCountAsync(specParams);
 
             if (products == null) return NoContent();
 
             var productsResponse = products.Select(P => _mapper.Map<ProductResponse>(P));
-
-            int count = await _productService.GetProductsCountAsync(specParams);
 
             var page = new Pagination<ProductResponse>(specParams.PageIndex, specParams.PageSize, count, productsResponse);
 
@@ -50,6 +48,9 @@ namespace Talabat.APIs.Controllers
             return Ok(_mapper.Map<ProductResponse>(product));
 
         }
+
+
+
 
     }
 }
